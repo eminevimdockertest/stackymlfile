@@ -13,6 +13,7 @@ services:
       - "51331:51331"
     networks: 
       - eminnetwork    
+
   app:
     image: eminevimdockertest/app:v1
     deploy:
@@ -24,9 +25,21 @@ services:
     ports:
       - "43093:43093"
     networks: 
-      - eminnetwork    
+      - eminnetwork
 
+  finalproject:
+    image: eminevimdockertest/finalproject:v1
+    deploy:
+      mode: global
+      update_config:
+        parallelism: 2
+        delay: 5s
+        order: stop-first
+    ports:
+      - "5000:5000"
+    networks: 
+      - eminnetwork
+      
 networks:
   eminnetwork:
     driver: overlay
-
